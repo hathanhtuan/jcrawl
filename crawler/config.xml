@@ -7,6 +7,13 @@
 <!--         <name>category</name> -->
 <!--         <queryString>div.divMenu ul li h2 a[href]</queryString> -->
 <!--     </criteria> -->
+<!-- 	<rootUrl>http://dantri.com.vn</rootUrl> -->
+<!--     <criteria> -->
+<!--     	<required>true</required> -->
+<!--         <multipleResult>true</multipleResult> -->
+<!--         <name>category</name> -->
+<!--         <queryString>div.nav-wrap div.clearfix div ul.nav li a[href]</queryString> -->
+<!--     </criteria> -->
 	<rootUrl>http://dantri.com.vn</rootUrl>
     <criteria>
     	<required>true</required>
