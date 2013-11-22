@@ -1,6 +1,5 @@
 package com.fastcodevn.crawler.criteria;
 
-import javax.xml.bind.annotation.XmlElement;
 
 public class Criteria {
 	private String name;

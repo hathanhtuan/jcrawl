@@ -2,8 +2,6 @@ package com.fastcodevn.crawler.parser;
 
 import java.io.IOException;
 
-import javax.management.RuntimeErrorException;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,8 +9,6 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fastcodevn.crawler.crawlable.Site;
-import com.fastcodevn.crawler.criteria.Configuration;
 import com.fastcodevn.crawler.criteria.Criteria;
 
 

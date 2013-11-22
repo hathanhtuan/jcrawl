@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import com.fastcodevn.crawler.Loggable;
-import com.fastcodevn.crawler.criteria.Configuration;
 import com.fastcodevn.crawler.criteria.Criteria;
 import com.fastcodevn.crawler.listener.OnCrawlCompleteListener;
 import com.fastcodevn.crawler.listener.OnCriteriaMatchListener;

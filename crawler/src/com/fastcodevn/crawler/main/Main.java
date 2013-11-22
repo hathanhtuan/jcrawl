@@ -7,8 +7,6 @@ import org.apache.log4j.BasicConfigurator;
 
 import com.fastcodevn.crawler.crawlable.Site;
 import com.fastcodevn.crawler.criteria.Configuration;
-import com.fastcodevn.crawler.criteria.PageCriteria;
-import com.fastcodevn.crawler.criteria.SiteCriteria;
 
 
 public class Main {

@@ -2,7 +2,6 @@ package com.fastcodevn.crawler.crawlable;
 
 import java.io.IOException;
 
-import com.fastcodevn.crawler.criteria.Configuration;
 import com.fastcodevn.crawler.parser.Parser;
 
 public abstract class AbstractCrawlableItem implements Crawlable{

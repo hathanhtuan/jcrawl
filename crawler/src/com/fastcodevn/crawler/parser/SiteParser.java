@@ -11,8 +11,6 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fastcodevn.crawler.crawlable.Site;
-import com.fastcodevn.crawler.criteria.Configuration;
 import com.fastcodevn.crawler.criteria.Criteria;
 
 

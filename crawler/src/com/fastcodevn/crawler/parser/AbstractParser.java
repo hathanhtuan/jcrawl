@@ -2,7 +2,6 @@ package com.fastcodevn.crawler.parser;
 
 import java.util.List;
 
-import com.fastcodevn.crawler.criteria.Configuration;
 import com.fastcodevn.crawler.criteria.Criteria;
 import com.fastcodevn.crawler.listener.OnCrawlCompleteListener;
 import com.fastcodevn.crawler.listener.OnCriteriaMatchListener;
