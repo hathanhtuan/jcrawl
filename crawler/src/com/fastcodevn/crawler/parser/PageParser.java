@@ -21,9 +21,9 @@ import com.fastcodevn.crawler.criteria.Criteria;
  * @author Click Here
  * this parser is responsible to get the list of categories of a site
  */
-public class SiteParser extends AbstractParser{
+public class PageParser extends AbstractParser{
 
-	private final Logger logger = LoggerFactory.getLogger(SiteParser.class);
+	private final Logger logger = LoggerFactory.getLogger(PageParser.class);
 	
 	@Override
 	public void parse(String url) throws IOException {
@@ -33,7 +33,7 @@ public class SiteParser extends AbstractParser{
 			Elements elements = doc.select(criteria.getQueryString());
 			if((elements == null || elements.size() == 0) && criteria.isRequired()){
 				getLog().error("Required element not found in criteria: " + criteria);
-				throw new RuntimeErrorException(new Error("Required element not found in criteria: " + criteria));
+				continue;
 			}
 			else if(criteria.isMultipleResult() == false && elements.size() > 1){
 				getLog().warn("found multiple values on single value query: " + criteria);

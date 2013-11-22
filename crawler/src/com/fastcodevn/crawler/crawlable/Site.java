@@ -1,7 +1,10 @@
 package com.fastcodevn.crawler.crawlable;
 
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.jsoup.nodes.Element;
@@ -10,33 +13,53 @@ import org.slf4j.LoggerFactory;
 
 import com.fastcodevn.crawler.criteria.Configuration;
 import com.fastcodevn.crawler.criteria.Criteria;
-import com.fastcodevn.crawler.listener.CriteriaMatchListener;
+import com.fastcodevn.crawler.listener.OnCrawlCompleteListener;
+import com.fastcodevn.crawler.listener.OnCriteriaMatchListener;
 import com.fastcodevn.crawler.parser.Parser;
 import com.fastcodevn.crawler.parser.SiteParser;
 
 public class Site extends AbstractCrawlableItem{
 
 	private final Logger logger = LoggerFactory.getLogger(Site.class);
-	private Set<String> categories = new HashSet<String>();
+	private List<Crawlable> categories = new ArrayList<Crawlable>(); 
 	
-	public Site(String siteURL, Configuration configuration){
-		super(siteURL, configuration);
+	public Site(String siteURL){
+		super(siteURL);
 	}
 	
 	@Override
 	public Parser getParser() {
 		return new SiteParser();
 	}
+
+	@Override
+	public OnCrawlCompleteListener getOnCrawlCompleteListener() {
+		return new OnCrawlCompleteListener() {
+			
+			@Override
+			public void onComplete(Criteria criteria) {
+				//get all categories, start crawling each category
+				for(Crawlable page: getChildren()){
+					System.out.println(page.getUrl());
+					try {
+						page.crawl();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+	}
 	
 	@Override
-	public CriteriaMatchListener getCriteriaMatchListener() {
-		return new CriteriaMatchListener() {
+	public OnCriteriaMatchListener getCriteriaMatchListener() {
+		return new OnCriteriaMatchListener() {
 			
 			@Override
 			public void onMatch(Criteria criteria, Element matchedElement) {
 				if(matchedElement != null){
 					if(criteria.getName().equals("category")){
-						categories.add(matchedElement.absUrl("href"));
+						getChildren().add(new Page(matchedElement.absUrl("href")));
 					}
 				}
 			}
@@ -47,9 +70,14 @@ public class Site extends AbstractCrawlableItem{
 	public Logger getLog() {
 		return logger;
 	}
-	
-	public Set<String> getCategories() {
+
+	@Override
+	public List<Crawlable> getChildren() {
 		return categories;
 	}
 
+	@Override
+	public List<? extends Criteria> getCriterias() {
+		return Configuration.getInstance().getSiteCriteria();
+	}
 }

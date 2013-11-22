@@ -1,10 +1,13 @@
 package com.fastcodevn.crawler.crawlable;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.fastcodevn.crawler.Loggable;
 import com.fastcodevn.crawler.criteria.Configuration;
-import com.fastcodevn.crawler.listener.CriteriaMatchListener;
+import com.fastcodevn.crawler.criteria.Criteria;
+import com.fastcodevn.crawler.listener.OnCrawlCompleteListener;
+import com.fastcodevn.crawler.listener.OnCriteriaMatchListener;
 import com.fastcodevn.crawler.parser.Parser;
 
 public interface Crawlable extends Loggable{
@@ -15,7 +18,10 @@ public interface Crawlable extends Loggable{
 	public Parser getParser();
 	public void setParser(Parser parser);
 	public void crawl() throws IOException;
-	public CriteriaMatchListener getCriteriaMatchListener();
-	public Configuration getConfiguration();
-//	public void onCriteriaMatch(Criteria criteria, String content);
+	public OnCriteriaMatchListener getCriteriaMatchListener();
+	public OnCrawlCompleteListener getOnCrawlCompleteListener();
+	public List<Crawlable> getChildren();
+	public List<? extends Criteria> getCriterias();
+	
+	//get list of children
 }

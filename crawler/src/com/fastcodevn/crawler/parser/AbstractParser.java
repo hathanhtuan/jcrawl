@@ -4,36 +4,31 @@ import java.util.List;
 
 import com.fastcodevn.crawler.criteria.Configuration;
 import com.fastcodevn.crawler.criteria.Criteria;
-import com.fastcodevn.crawler.listener.CriteriaMatchListener;
+import com.fastcodevn.crawler.listener.OnCrawlCompleteListener;
+import com.fastcodevn.crawler.listener.OnCriteriaMatchListener;
 
 public abstract class AbstractParser implements Parser{
 	
-	protected CriteriaMatchListener criteriaMatchListener;
-	private List<Criteria> criterias;
-	private Configuration configuration;
+	protected OnCriteriaMatchListener criteriaMatchListener;
+	protected OnCrawlCompleteListener crawlCompleteListener;
+	private List<? extends Criteria> criterias;
 	
 	@Override
-	public void loadConfig(Configuration configuration) {
-		setCriterias(configuration.getCriterias());
-		this.configuration = configuration;
-	}
-	
-	@Override
-	public Configuration getConfiguration() {
-		return configuration;
-	}
-	
-	@Override
-	public void setOnCriteriaMatchListener(CriteriaMatchListener listener) {
+	public void setOnCriteriaMatchListener(OnCriteriaMatchListener listener) {
 		this.criteriaMatchListener = listener;
 	}
 	
 	@Override
-	public List<Criteria> getCriterias() {
+	public void setOnCrawlCompleteListener(OnCrawlCompleteListener listener) {
+		this.crawlCompleteListener = listener;
+	}
+	
+	@Override
+	public List<? extends Criteria> getCriterias() {
 		return criterias;
 	}
 
-	public void setCriterias(List<Criteria> criterias) {
+	public void setCriterias(List<? extends Criteria> criterias) {
 		this.criterias = criterias;
 	}
 }

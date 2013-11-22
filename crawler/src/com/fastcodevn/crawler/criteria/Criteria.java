@@ -1,11 +1,12 @@
 package com.fastcodevn.crawler.criteria;
 
+import javax.xml.bind.annotation.XmlElement;
+
 public class Criteria {
 	private String name;
 	private String queryString;
 	private boolean multipleResult;
 	private boolean required;
-	
 	
 	
 	

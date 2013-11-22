@@ -12,7 +12,6 @@ public abstract class AbstractCrawlableItem implements Crawlable{
 	long lastCrawledTime;
 	private String content;
 	private Parser parser;
-	private Configuration configuration;
 	
 	private void initEmpty(){
 		isCrawled = false;
@@ -20,9 +19,8 @@ public abstract class AbstractCrawlableItem implements Crawlable{
 		content = "";
 	}
 	
-	public AbstractCrawlableItem(String url, Configuration configuration) {
+	public AbstractCrawlableItem(String url) {
 		this.url = url;
-		this.configuration = configuration;
 		initEmpty();
 	}
 	
@@ -79,14 +77,12 @@ public abstract class AbstractCrawlableItem implements Crawlable{
 		if(parser == null){
 			setParser(getParser());
 		}
-		parser.loadConfig(getConfiguration());
 		parser.setOnCriteriaMatchListener(getCriteriaMatchListener());
-		parser.parse();
+		parser.setOnCrawlCompleteListener(getOnCrawlCompleteListener());
+		parser.setCriterias(getCriterias());
+		
+		parser.parse(getUrl());
+		
 		setCrawled(true);
-	}
-	
-	@Override
-	public Configuration getConfiguration() {
-		return configuration;
 	}
 }

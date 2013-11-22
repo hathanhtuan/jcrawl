@@ -7,6 +7,8 @@ import org.apache.log4j.BasicConfigurator;
 
 import com.fastcodevn.crawler.crawlable.Site;
 import com.fastcodevn.crawler.criteria.Configuration;
+import com.fastcodevn.crawler.criteria.PageCriteria;
+import com.fastcodevn.crawler.criteria.SiteCriteria;
 
 
 public class Main {
@@ -14,11 +16,9 @@ public class Main {
 		BasicConfigurator.configure();
 		
 		Configuration configuration = Configuration.unmarshal("config.xml");
-		
-		Site site = new Site(configuration.getRootUrl(), configuration);
+		Site site = new Site(configuration.getRootUrl());
 		try {
 			site.crawl();
-			System.out.println(site.getCategories());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
