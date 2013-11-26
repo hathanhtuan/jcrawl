@@ -34,7 +34,7 @@ public class Page extends AbstractCrawlableItem {
 			@Override
 			public void onMatch(Criteria criteria, Element matchedElement) {
 				// TODO Auto-generated method stub
-				
+				System.out.println(matchedElement.absUrl("href"));
 			}
 		};
 	}
@@ -50,8 +50,6 @@ public class Page extends AbstractCrawlableItem {
 			
 			@Override
 			public void onComplete(Criteria criteria) {
-				// TODO Auto-generated method stub
-				
 			}
 		};
 	}

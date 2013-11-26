@@ -9,7 +9,9 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fastcodevn.crawler.crawlable.Page;
 import com.fastcodevn.crawler.criteria.Criteria;
+import com.fastcodevn.crawler.criteria.PageCriteria;
 
 
 
@@ -20,6 +22,15 @@ import com.fastcodevn.crawler.criteria.Criteria;
 public class PageParser extends AbstractParser{
 
 	private final Logger logger = LoggerFactory.getLogger(PageParser.class);
+	
+	private String printPath(Element e){
+		if(e.parent() != null){
+			return printPath(e.parent()) + "\\" + e.nodeName();
+		}
+		else{
+			return e.nodeName();
+		}
+	}
 	
 	@Override
 	public void parse(String url) throws IOException {
@@ -36,6 +47,23 @@ public class PageParser extends AbstractParser{
 			}
 			for(Element e: elements){
 				criteriaMatchListener.onMatch(criteria, e);
+			}
+			if(criteria instanceof PageCriteria){
+				String nextQuery = ((PageCriteria)criteria).getNextPageQueryString();
+				if(nextQuery != null && nextQuery.length() > 0){
+					Elements nextLinks = doc.select(nextQuery);
+					if(nextLinks.size() > 0){
+						Element nextElement = nextLinks.get(0);
+						Page page = new Page(nextElement.absUrl("href"));
+						page.crawl();
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				}
 			}
 			crawlCompleteListener.onComplete(criteria);
 		}
