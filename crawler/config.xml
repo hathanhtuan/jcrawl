@@ -13,5 +13,6 @@
         <name>article</name>
         <queryString>div div div div div div h2 a[href]</queryString>
         <nextPageQueryString>div.wrapper div.container div.clearfix div.fl div.fr div.fl a[href]</nextPageQueryString>
+        <nextPageItemIndex>last</nextPageItemIndex>
     </pageCriteria>
 </configuration>

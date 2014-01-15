@@ -37,10 +37,9 @@ public class Site extends AbstractCrawlableItem {
 			public void onComplete(Criteria criteria) {
 				// get all categories, start crawling each category
 				for (Crawlable page : getChildren()) {
-					System.out.println(page.getUrl());
 					try {
 						page.crawl();
-						Thread.sleep(1000);
+						Thread.sleep(3000);
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (InterruptedException e) {

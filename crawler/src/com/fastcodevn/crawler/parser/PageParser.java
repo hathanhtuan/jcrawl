@@ -34,7 +34,7 @@ public class PageParser extends AbstractParser{
 	
 	@Override
 	public void parse(String url) throws IOException {
-		
+		System.out.println("\n\n\nCrawling page " + url);
 		Document doc = Jsoup.connect(url).get();
 		for(Criteria criteria: getCriterias()){
 			Elements elements = doc.select(criteria.getQueryString());
@@ -53,15 +53,15 @@ public class PageParser extends AbstractParser{
 				if(nextQuery != null && nextQuery.length() > 0){
 					Elements nextLinks = doc.select(nextQuery);
 					if(nextLinks.size() > 0){
-						Element nextElement = nextLinks.get(0);
+						Element nextElement = ((PageCriteria)criteria).getNextIndex(nextLinks);
 						Page page = new Page(nextElement.absUrl("href"));
-						page.crawl();
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(3000);
 						} catch (InterruptedException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						page.crawl();
 					}
 				}
 			}
